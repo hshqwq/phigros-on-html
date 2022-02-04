@@ -1,0 +1,179 @@
+#ui{
+    width: 100%;
+    height: 100%;
+}
+.button{
+    display: inline-block;
+    position: fixed;
+    width: 1.25cm;
+    height: 0.875cm;
+    z-index: 1;
+}
+.button::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: skew(-15deg);
+    background-color: black;
+}
+.button::after{
+    content: "";
+    position: absolute;
+    background-position: left center;
+    background-size: cover;
+    width: 0.5cm;
+    height: 0.5cm;
+    top: 0.175cm;
+}
+#settings{
+    top: 10px;
+    right: -0.25cm;
+}
+#settings::before{
+    border-left: 5px solid white;
+}
+#settings::after{
+    background-image: url(../img/ui/setting.png);
+    right: 0.4cm;
+}
+#back{
+    top: 10px;
+    left: -0.25cm;
+}
+#back::before{
+    border-right: 5px solid white;
+}
+#back::after{
+    background-image: url(../img/ui/back.png);
+    left: 0.4cm;
+}
+#selects{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding-top: 4rem;
+    left: 0.75cm;
+    height: calc(100% - 4rem);
+    width: 30vw;
+    transform: skew(-15deg);
+    background-color: #00000077;
+}
+#selects::before{
+    content: "曲目";
+    display: flex;
+    position: absolute;
+    padding: 0.25rem 0;
+    width: 100%;
+    top: 10px;
+    left: 8px;
+    color: white;
+    justify-content: center;
+    justify-items: center;
+    font-size: 1.5rem;
+    background-color: #000000cc;
+    border-right: 5px solid #ffffffee;
+    border-bottom: 2px solid #ffffffee;
+}
+.song{
+    width: 100%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    -webkit-transition: background-color .3s, color .3s;
+    transition: background-color .3s, color .3s;
+}
+.song:hover{
+    background-color: #ffffff55;
+}
+.song.focus,
+.song.focus span{
+    background-color: white;
+    color: black
+}
+.title{
+    width: calc(100% - 3rem);
+    margin-left: 1rem;
+    font-size: 1.25rem;
+}
+.dfcy{
+    display: flex;
+    color: white;
+    width: 3rem;
+    height: 100%;
+    font-size: 1.5rem;
+    align-items: center;
+    justify-content: center;
+}
+#song{
+    position: absolute;
+    top: 55%;
+    right: 10vw;
+    width: 60vw;
+    max-width: 25rem;
+    height: 65%;
+    max-height: 20rem;
+    transform: translateY(-50%) skew(-15deg);
+}
+#song-img{
+    width: 100%;
+    height: calc(100% - 4rem);
+    background-image: url(../img/bg/img0.png);
+    background-size: cover;
+    background-position: center center;
+}
+#song-dfcy{
+    display: flex;
+    position: absolute;
+    bottom: 0.25rem;
+    left: 0;
+    width: 100%;
+    height: 2.5rem;
+    background-color: #00000077;
+}
+#song-dfcy::after{
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    z-index: 1;
+}
+#song-dfcy>span{
+    width: calc(50% / 4);
+    height: 100%;
+    color: black;
+    z-index: 3;
+    text-align: center;
+}
+#song-dfcy-focus{
+    display: inline;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    width: calc(50% / 4 - 10px);
+    height: calc(100% + 10px);
+    background-color: #55bb44;
+    z-index: 2;
+}
+#song-dfcy[dfcy = "ez"]>#song-dfcy-ez{
+    color: white;
+}
+#song-dfcy[dfcy = "hd"]>#song-dfcy-hd{
+    color: white;
+}
+#song-dfcy[dfcy = "in"]>#song-dfcy-in{
+    color: white;
+}
+#song-dfcy[dfcy = "at"]>#song-dfcy-at{
+    color: white;
+}
+#song-dfcy[dfcy = "hd"]>#song-dfcy-focus{
+    left: calc(50% / 4 + 5px);
+}
+#song-dfcy[dfcy = "in"]>#song-dfcy-focus{
+    left: calc(50% / 2 + 5px);
+}
+#song-dfcy[dfcy = "at"]>#song-dfcy-focus{
+    left: calc(50% / 4 * 3 + 5px);
+}
