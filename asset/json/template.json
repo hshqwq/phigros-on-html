@@ -1,0 +1,58 @@
+{
+  "Single": [
+    {
+      "name": "test",
+      "id": "song0",
+      "dfcy": {
+        "ez": 2,
+        "hd": 6,
+        "in": 10,
+        "at": "none",
+        "sp": "none"
+      },
+      "mark": 0,
+      "ACC": 0
+    },
+    {
+      "name": "test1",
+      "id": "song1",
+      "dfcy": {
+        "ez": 4,
+        "hd": 9,
+        "in": 13,
+        "at": "none",
+        "sp": "none"
+      },
+      "mark": 0,
+      "ACC": 0
+    }
+  ],
+  "Chapter1": [
+    {
+      "name": "test",
+      "id": "song0",
+      "dfcy": {
+        "ez": 2,
+        "hd": 6,
+        "in": 10,
+        "at": "none",
+        "sp": "none"
+      },
+      "mark": 0,
+      "ACC": 0
+    },
+    {
+      "name": "test1",
+      "id": "song1",
+      "dfcy": {
+        "ez": 4,
+        "hd": 9,
+        "in": 13,
+        "at": "none",
+        "sp": "none"
+      },
+      "mark": 0,
+      "ACC": 0
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+#effects *{
+    z-index: -15;
+}
+.ef-rBmT{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background-color: #fffa;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px #fffa;
+    border-radius: 100%;
+    opacity: 0;
+    -webkit-animation: rBmT 12s linear;
+    animation: rBmT 12s linear;
+    -webkit-animation-fill-mode: initial;
+    animation-fill-mode: initial;
+    -webkit-transition: bottom 12s linear;
+    transition: bottom 12s linear;
+}
+@keyframes rBmT{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        bottom: 110%;
+    }
+}

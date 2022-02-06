@@ -1,28 +1,31 @@
+// ui and page
 function changePage(pageName){
     $('body').attr('page', pageName);
     $('#pageCss').attr('href', `asset/css/${pageName}.css`);
-    $('#ui *').remove();
+    $('#ui').empty();
 }
 
+// 切换背景
 function changeBg (img) {
     $('#bg').attr('src', `asset/img/bg/${img}`);
 }
 
-function loadAudio(src) {
-    console.log('run loadAudio    ' + src);
+// audio
+function loadAudio(src) { // 加载音频
     // 将音频加入数组并加载
     for (let i = 0; i < audios.length; i++) {
         if (audios[i].currentSrc.includes(src)) {
             return;
         }
     }
+    console.log('run loadAudio    ' + src);
     let id = audios.length;
     audios[id] = new Audio(src);
     audios.load;
     return audios[id];
 }
 
-function setAudio(type, audioId = 0){
+function setAudio(type, audioId = 0){ // 操作音频（播放、暂停等）
     console.log('run setAudio    ' + type);
     let audio;
     // 处理audioId参数（查找对应id/src的音频）
@@ -61,6 +64,7 @@ function setAudio(type, audioId = 0){
     }
 }
 
+// 删除数组中第几项或第几到第几项，并重排数组
 Array.prototype.remove = function(from, to) {
     var rest = this.slice((to || from) + 1 || this.length);
     this.length = from < 0 ? this.length + from : from;
@@ -88,6 +92,40 @@ function removeAudio(audioId) { // 删除指定音频
     audios.remove(audio);
 }
 
+//effect
+function addEffect(type, many) { //添加一定数量的特效
+    let el, time/*特效开始时间*/ = new Date().getTime();
+    // 检测特效类型
+    switch (type) {
+        case 'rBmT': 
+            el = `<span class="ef-rBmT" start="${time}"></span>`;
+            break;
+    }
+    // 添加特效
+    for (let i = 0; i < many; i++) {
+        $('#effects').append(el);
+    }
+    // 执行特定类型特效的函数
+    switch (type) {
+        case 'rBmT': 
+            $(`.ef-${type}[start=${time}]`).each((index, element) => {
+                let els = element.style,elsb = Math.random() * 65 - 5;
+                els.left = `${Math.random() * 100}vw`;
+                els.bottom = `${elsb}%`;
+                setTimeout(() => {
+                    element.remove();
+                }, 12500);
+            });
+            break;
+    }
+}
+
+//chapter
+function addSong(name, dfcy){ //在曲目列表中添加曲目
+    $('#songs>div').append(`<div class="song"><span class="title">${name}</span><span class="dfcy">${dfcy}</span></div>`);
+}
+
+//page main f
 function toHome(chapter) {
     // 更换页面及背景
     changePage("home");
@@ -139,7 +177,7 @@ function toHome(chapter) {
     setAudio(3, 'ChapterSelect.wav');
     setAudio(1, 'ChapterSelect.wav');
     // 显示界面
-    $('#ui').fadeIn(1000);
+    $('#ui,#effects').fadeIn(1000);
     $('#bg').fadeTo(1000, 1, () => {
         // 当章节选择的空白处被点击移除所有章节的被选中class
         $('#selects').unbind('click').click((event) =>{
@@ -157,7 +195,7 @@ function toHome(chapter) {
                 setAudio(1, 'Tap1.wav');
                 setAudio(0, 'ChapterSelect.wav');
                 $('*').finish();
-                $('#ui,#bg').fadeOut(1000, () => {
+                $('#ui,#effects,#bg').fadeOut(1000, () => {
                     toChapter(el.title);
                 });
             // 给予章节被选中class，并处理模糊动画
@@ -173,26 +211,42 @@ function toHome(chapter) {
     });
 }
 
+// 跳转至章节（曲目选择界面）
 function toChapter(chapter) {
+    // 切换界面
     changePage("chapter");
     $('#blur').fadeOut(1000);
     changeBg('img0.webp');
-    $('#ui').append(`<span id="settings" class="button"></span><span id="back" class="button"></span><div id="selects">
-    <div class="song">
-        <span class="title">test</span>
-        <span class="dfcy">?</span>
-    </div>
-    <div class="song">
-        <span class="title">test</span>
-        <span class="dfcy">?</span>
-    </div>
-    <div class="song">
-        <span class="title">test</span>
-        <span class="dfcy">?</span>
-    </div>
-    </div><div id="song"><img id="song-img"/><div id="song-dfcy" dfcy="ez"><span id="song-dfcy-ez">?</span><span id="song-dfcy-hd">?</span><span id="song-dfcy-in">?</span><span id="song-dfcy-at">?</span><div id="song-dfcy-focus"></div></div></div>`);
+    // 添加UI
+    $('#ui').append(`<span id="settings" class="button"></span><span id="back" class="button"></span><div id="selects"><div id="songs"><div></div></div></div><div id="song"><img id="song-img"/><div id="song-dfcy" dfcy="ez"><span id="song-dfcy-ez">?</span><span id="song-dfcy-hd">?</span><span id="song-dfcy-in">?</span><span id="song-dfcy-at">?</span><div id="song-dfcy-focus"></div></div></div>`);
+    // 添加曲目
+    for (let i = 0; i < data[chapter].length; i++) {
+        console.log(data[chapter][i]);
+        addSong(data[chapter][i].name, data[chapter][i].dfcy.ez);
+    }
+    // 淡入界面
     $('#ui').fadeIn(1000);
     $('#bg').fadeTo(1000, 1, () => {
+        // 曲目选择
+        $('.song').unbind('click').click((event) => {
+            let el = event.currentTarget;
+            $('.song').attr('class', 'song');
+            el.className = 'song focus';
+        });
+        // 难度选择点击事件处理
+        $('#song-dfcy-ez').unbind('click').click(() => {
+            $('#song-dfcy').attr('dfcy', 'ez');
+        });
+        $('#song-dfcy-hd').unbind('click').click(() => {
+            $('#song-dfcy').attr('dfcy', 'hd');
+        });
+        $('#song-dfcy-in').unbind('click').click(() => {
+            $('#song-dfcy').attr('dfcy', 'in');
+        });
+        $('#song-dfcy-at').unbind('click').click(() => {
+            $('#song-dfcy').attr('dfcy', 'at');
+        });
+        // 回到主页按键被点击事件处理
         $('#back').unbind('click').click(() => {
             $('#back').unbind('click');
             $('*').finish();
@@ -206,23 +260,42 @@ function toChapter(chapter) {
 
 
 //init
-let audios = new Array;
+let audios = new Array,data;
 $(() => {
     $('body *').hide();
-    $('#bg').attr('src', `asset/img/bg/img${Math.round(Math.random() * 14)}.webp`);
+    changeBg(`img${Math.round(Math.random() * 14)}.webp`);
     $('#start').show().unbind('click').click(() => {
         $('#start').remove();
         setTimeout(() => {
-            $('#ui,#title').fadeIn(1000);
+            $('#ui,#effects,#title').fadeIn(1000);
+            // rBmT特效定时器
+            let efRBmT = setInterval(() => {
+                addEffect('rBmT', Math.round(Math.random() + 1))
+            }, 1500);
             $('#description').fadeIn(2000);
-            // loading audios
+            // 加载音频
             loadAudio('asset/audio/bgm/TouchToStart.wav').oncanplaythrough = () => {
             loadAudio('asset/audio/bgm/ChapterSelect.wav').oncanplaythrough = () => {
             loadAudio('asset/audio/ui/Tap3.wav').oncanplaythrough = () => {
             loadAudio('asset/audio/ui/Tap1.wav').oncanplaythrough = () => {
+                //检查已存储数据
+                if(! window.localStorage){
+                    // 警告用户当前浏览器（模式）不支持存储
+                    info("浏览器不支持存储", 'error');
+                }else{
+                    data = window.localStorage;
+                    if (data['data'] === undefined) { //如果没存储过数据则初始化存储数据
+                        data['data'] = `{"Single":[{"name":"test","id":"song0","dfcy":{"ez":2,"hd":6,"in":10,"at":"none","sp":"none"},"mark":0,"ACC":0},{"name":"test1","id":"song1","dfcy":{"ez":4,"hd":9,"in":13,"at":"none","sp":"none"},"mark":0,"ACC":0}],"Chapter1":[{"name":"test","id":"song0","dfcy":{"ez":2,"hd":6,"in":10,"at":"none","sp":"none"},"mark":0,"ACC":0},{"name":"test1","id":"song1","dfcy":{"ez":4,"hd":9,"in":13,"at":"none","sp":"none"},"mark":0,"ACC":0}]}`
+                    };
+                    // 将数据由json格式转为变量
+                    data = JSON.parse(data['data']);
+                    console.log(data); //测试用
+                }
                 setAudio(3, 'TouchToStart.wav');
                 setAudio(1, 'TouchToStart.wav');
+                // 显示背景
                 $('#bg').fadeTo(4000, 0.5);
+                // 更改文本内容动画
                 $('#description').animate({width: '0%'}, 1000, () => {
                     $('#description').text('touch to start');
                 });
@@ -230,11 +303,13 @@ $(() => {
                     $('#description').animate({width: '100%'}, 1000, () => {
                         // 页面被点击进入主页面（章节选择）
                         $('body').unbind('click').click(() => {
+                            // 淡出界面并清除该页面事件
                             $('body').unbind('click');
                             $('*').finish();
                             setAudio(0, 'TouchToStart.wav');
                             removeAudio('TouchToStart.wav');
-                            $('#ui,#bg').fadeOut(1000, () => {
+                            $('#ui,#effects,#bg').fadeOut(1000, () => {
+                                // 进入章节选择界面
                                 toHome();
                             });
                         });
