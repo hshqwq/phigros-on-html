@@ -42,20 +42,19 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 100vw;
+    width: 84vw;
     height: 75%;
-    max-height: 25rem;
-    padding-left: 5rem;
-    padding-top: calc((100% - 85% - 0.5cm) / 2);
-    padding-bottom: calc((100% - 85% - 0.5cm) / 2);
+    align-items: center;
+    padding: 5% 8vw;
     overflow: auto;
     flex-shrink: 0;
     white-space: nowrap;
+    scroll-behavior: smooth;
 }
 .select{
     height: 98%;
     width: 10vw;
-    margin-right: 3rem;
+    margin-right: 5vw;
     transform: skew(-15deg);
     border-left: 5px solid white;
     box-shadow: 2px 2px 5px black;

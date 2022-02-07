@@ -10,6 +10,41 @@ function changeBg (img) {
     $('#bg').attr('src', `asset/img/bg/${img}`);
 }
 
+// info
+function info(text='', type='none') { // 显示提示信息
+    let time = new Date().getTime();
+    switch (type) {
+        case 'none':
+            $('#infoList').append(`<li class="infos" start="${time}">${text}</li>`);
+            console.log(`%c${text}`, 'font-size: 1rem;background-color: #bbbbbb;color: white;border-left: 4px solid;border-right: 4px solid;border-color: #939393;');
+            break;
+        case 'info':
+            $('#infoList').append(`<li class="infos info-info" start="${time}">${text}</li>`);
+            console.log(`%c${text}`, 'font-size: 1rem;background-color: #00bbbb;color: white;border-left: 4px solid;border-right: 4px solid;border-color: #00ffff;');
+            break;
+        case 'good':
+            $('#infoList').append(`<li class="infos info-good" start="${time}">${text}</li>`);
+            console.log(`%c${text}`, 'font-size: 1rem;background-color: #00bb00;color: white;border-left: 4px solid;border-right: 4px solid;border-color: #00ff00;');
+            break;
+        case 'warning':
+            $('#infoList').append(`<li class="infos info-warning" start="${time}">${text}</li>`);
+            console.warn(`%c警告: ${text}`, 'font-size: 1rem;background-color: #bbbb00;color: white;border-left: 4px solid;border-right: 4px solid;border-color: #ffff00;');
+            break;
+        case 'error':
+            $('#infoList').append(`<li class="infos info-error" start="${time}">${text}</li>`);
+            console.error(`%c错误: ${text}`, 'font-size: 1rem;background-color: #bb0000;color: white;border-left: 4px solid;border-right: 4px solid;border-color: #ff0000;');
+            break;
+    }
+    // 信息提示框动画
+    $(`.infos[start="${time}"]`).hide();
+    $(`.infos[start="${time}"]`).fadeIn(1000);
+    setTimeout(() => {
+        $(`.infos[start="${time}"]`).fadeOut(1000, () => {
+            $(`.infos[start="${time}"]`).remove();
+        });
+    }, 3000);
+}
+
 // audio
 function loadAudio(src) { // 加载音频
     // 将音频加入数组并加载
@@ -21,7 +56,13 @@ function loadAudio(src) { // 加载音频
     console.log('run loadAudio    ' + src);
     let id = audios.length;
     audios[id] = new Audio(src);
-    audios.load;
+    audios[id].load;
+    audios[id].onerror = () => {
+        info(`音频加载错误/失败`, 'error');
+    }
+    audios[id].onstalled = () => {
+        info(`音频加载错误/失败`, 'error');
+    }
     return audios[id];
 }
 
@@ -109,7 +150,8 @@ function addEffect(type, many) { //添加一定数量的特效
     switch (type) {
         case 'rBmT': 
             $(`.ef-${type}[start=${time}]`).each((index, element) => {
-                let els = element.style,elsb = Math.random() * 65 - 5;
+                let els = element.style,elsb = Math.random() * 65 - 5, r = Math.round(Math.random() * 10 + 12);
+                els.width = els.height = `${r}px`;
                 els.left = `${Math.random() * 100}vw`;
                 els.bottom = `${elsb}%`;
                 setTimeout(() => {
@@ -159,19 +201,12 @@ function toHome(chapter) {
         <div class="select-blur"></div>
         <div class="select-bg"></div>
     </span>
-    <span class="select" title="Test">
-        <h2 class="select-title">Test</h2>
-        <h2 class="select-cntitle">测试</h2>
-        <div class="select-play"></div>
-        <div class="select-info">
-            <span class="select-all">?</span>
-            <span class="select-clear">?</span>
-            <span class="select-fc">?</span>
-            <span class="select-phi">?</span>
-        </div>
-        <div class="select-blur"></div>
-        <div class="select-bg"></div>
-    </span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
+    <span class="select" title="Test"><h2 class="select-title">Test</h2><h2 class="select-cntitle">测试</h2><div class="select-play"></div><div class="select-info"><span class="select-all">?</span><span class="select-clear">?</span><span class="select-fc">?</span><span class="select-phi">?</span></div><div class="select-blur"></div><div class="select-bg"></div></span>
     </div>`);
     // 设置音频
     setAudio(3, 'ChapterSelect.wav');
@@ -194,6 +229,7 @@ function toHome(chapter) {
                 setAudio(0, 'Tap1.wav');
                 setAudio(1, 'Tap1.wav');
                 setAudio(0, 'ChapterSelect.wav');
+                $('*').unbind();
                 $('*').finish();
                 $('#ui,#effects,#bg').fadeOut(1000, () => {
                     toChapter(el.title);
@@ -207,6 +243,16 @@ function toHome(chapter) {
                 $('.select .select-blur').finish().fadeIn(600);
                 $('.select.focus .select-blur').finish().fadeOut(600);
             }
+        });
+        $('#settings').unbind('click').click(() => {
+            setAudio(0, 'Tap1.wav');
+            setAudio(1, 'Tap1.wav');
+            setAudio(0, 'ChapterSelect.wav');
+            $('*').unbind();
+            $('*').finish();
+            $('#ui,#effects,#bg').fadeOut(1000, () => {
+                toSettings();
+            });
         });
     });
 }
@@ -248,36 +294,106 @@ function toChapter(chapter) {
         });
         // 回到主页按键被点击事件处理
         $('#back').unbind('click').click(() => {
-            $('#back').unbind('click');
+            $('*').unbind();
             $('*').finish();
             $('#ui,#bg').fadeOut(1000, () => {
                 toHome();
+            });
+        });
+        $('#settings').unbind('click').click(() => {
+            setAudio(0, 'Tap1.wav');
+            setAudio(1, 'Tap1.wav');
+            setAudio(0, 'ChapterSelect.wav');
+            $('*').unbind();
+            $('*').finish();
+            $('#ui,#effects,#bg').fadeOut(1000, () => {
+                toSettings();
             });
         });
     });
     
 }
 
+// 跳转至设置页面
+function toSettings() {
+    changePage("settings");
+    $('#ui').append(`<span id="back" class="button"></span><div id="selects"><div id="sets"><div>
+    <div id="pmyc" class="set-range">
+        <div class="set-title">
+        <h4>谱面延迟</h4><p id="pmyc-yc"></p>
+        </div>
+        <span class="set-range-lessen">-</span><input type="range" min="-400" max="600"></input><span class="set-range-add"></span> 
+    </div>
+    <div class="set-range">
+        <h4 class="set-title">谱面延迟</h4>
+        <span class="set-range-lessen">-</span><input type="range" min="-400" max="600"></input><span class="set-range-add"></span> 
+    </div>
+    </div></div></div><div id="song"><img id="song-img"/><div id="song-dfcy" dfcy="ez"><span id="song-dfcy-ez">?</span><span id="song-dfcy-hd">?</span><span id="song-dfcy-in">?</span><span id="song-dfcy-at">?</span><div id="song-dfcy-focus"></div></div></div>`);
+    $('#ui,#bg').fadeIn(1000, () => {
+
+    });
+}
+
 
 //init
-let audios = new Array,data;
+let audios = new Array,data,loaded = false;
 $(() => {
+    // 更改/刷新进度条及进度
+    function setProgress(progress=0, lenth=999){
+        if (!loaded) {
+           $('#progressTitle').text(`${progress} / ${lenth}`);
+            document.querySelector('#progressBar-finished').style.width = progress / lenth * 100 + '%';
+            if (progress / lenth == 1) {
+                $('#progress').slideUp(1000, () => {
+                    $('#progress').remove();
+                    loaded = true;
+                });
+            } 
+        }
+    }
     $('body *').hide();
+    $('#infoList').show();
     changeBg(`img${Math.round(Math.random() * 14)}.webp`);
     $('#start').show().unbind('click').click(() => {
         $('#start').remove();
         setTimeout(() => {
+            setProgress(0, 1);
             $('#ui,#effects,#title').fadeIn(1000);
+            $('#description,#progress,#progress *').fadeIn(2000);
             // rBmT特效定时器
             let efRBmT = setInterval(() => {
                 addEffect('rBmT', Math.round(Math.random() + 1))
             }, 1500);
-            $('#description').fadeIn(2000);
+            setProgress(1, 11);
+            // 检查浏览器兼容性
+            let ua =navigator.userAgent;
+            if (window.opera) {
+                ua = 'opera';
+                info('当前浏览器可能无法正常显示界面', 'warning');
+                setProgress(2, 11);
+            } else if (ua.includes('Firefox')) {
+                ua = 'firefox';
+                info('当前浏览器可能无法正常显示界面', 'warning');
+                setProgress(3, 11);
+            } else if (ua.includes('Chrome')) {
+                ua = 'chrome';
+                info('正常情况下当前浏览器可以完美适配游戏界面', 'good');
+                setProgress(4, 11);
+            } else {
+                ua = 'unknow';
+                info('当前浏览器可能无法正常显示界面', 'warning');
+                setProgress(5, 11);
+            }
+            setProgress(6, 11)
             // 加载音频
             loadAudio('asset/audio/bgm/TouchToStart.wav').oncanplaythrough = () => {
+            setProgress(7, 11);
             loadAudio('asset/audio/bgm/ChapterSelect.wav').oncanplaythrough = () => {
+            setProgress(8, 11);
             loadAudio('asset/audio/ui/Tap3.wav').oncanplaythrough = () => {
+            setProgress(9, 11);
             loadAudio('asset/audio/ui/Tap1.wav').oncanplaythrough = () => {
+                setProgress(10, 11);
                 //检查已存储数据
                 if(! window.localStorage){
                     // 警告用户当前浏览器（模式）不支持存储
@@ -291,6 +407,7 @@ $(() => {
                     data = JSON.parse(data['data']);
                     console.log(data); //测试用
                 }
+                setProgress(11, 11);
                 setAudio(3, 'TouchToStart.wav');
                 setAudio(1, 'TouchToStart.wav');
                 // 显示背景
@@ -304,7 +421,7 @@ $(() => {
                         // 页面被点击进入主页面（章节选择）
                         $('body').unbind('click').click(() => {
                             // 淡出界面并清除该页面事件
-                            $('body').unbind('click');
+                            $('*').unbind();
                             $('*').finish();
                             setAudio(0, 'TouchToStart.wav');
                             removeAudio('TouchToStart.wav');

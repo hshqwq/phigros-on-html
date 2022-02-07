@@ -26,17 +26,6 @@
     height: 0.5cm;
     top: 0.175cm;
 }
-#settings{
-    top: 10px;
-    right: -0.25cm;
-}
-#settings::before{
-    border-left: 5px solid white;
-}
-#settings::after{
-    background-image: url(../img/ui/setting.png);
-    right: 0.4cm;
-}
 #back{
     top: 10px;
     left: -0.25cm;
@@ -50,42 +39,41 @@
 }
 #selects{
     position: absolute;
-    padding-top: 4rem;
-    left: 1.5cm;
+    padding-top: 3rem;
+    left: 2cm;
     height: calc(100% - 4rem);
-    width: 30vw;
+    width: 40vw;
     transform: skew(-15deg);
     background-color: #00000077;
 }
-#songs{
+#sets{
     position: absolute;
     height: 100%;
     width: 30vw;
     overflow: auto;
     direction: rtl;
 }
-#songs>div{
+#sets>div{
     display: flex;
     flex-direction: column;
     direction: ltr;
 }
 #selects::before{
-    content: "曲目";
+    content: "设置";
     display: flex;
     position: absolute;
-    padding: 0.25rem 0;
     width: 100%;
     top: 10px;
     left: 8px;
     color: white;
     justify-content: center;
     justify-items: center;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     background-color: #000000cc;
     border-right: 5px solid #ffffffee;
     border-bottom: 2px solid #ffffffee;
 }
-.song{
+.set{
     width: 100%;
     height: 2.5rem;
     display: flex;
@@ -93,11 +81,11 @@
     -webkit-transition: background-color .3s, color .3s;
     transition: background-color .3s, color .3s;
 }
-.song:hover{
+.set:hover{
     background-color: #ffffff55;
 }
-.song.focus,
-.song.focus span{
+.set.focus,
+.set.focus span{
     background-color: white;
     color: black
 }
@@ -115,7 +103,7 @@
     align-items: center;
     justify-content: center;
 }
-#song{
+#set{
     position: absolute;
     top: 55%;
     right: 15vw;
@@ -125,14 +113,14 @@
     max-height: 20rem;
     transform: translateY(-50%) skew(-15deg);
 }
-#song-img{
+#set-img{
     width: 100%;
     height: calc(100% - 4rem);
     background-image: url(../img/bg/img0.png);
     background-size: cover;
     background-position: center center;
 }
-#song-dfcy{
+#set-dfcy{
     display: flex;
     position: absolute;
     bottom: 0.25rem;
@@ -141,7 +129,7 @@
     height: 2.5rem;
     background-color: #00000077;
 }
-#song-dfcy::after{
+#set-dfcy::after{
     content: "";
     position: absolute;
     width: 50%;
@@ -149,7 +137,7 @@
     background-color: white;
     z-index: 1;
 }
-#song-dfcy>span{
+#set-dfcy>span{
     width: calc(50% / 4);
     height: 100%;
     color: black;
@@ -158,7 +146,7 @@
     -webkit-transition: color .3s;
     transition: color .3s;
 }
-#song-dfcy-focus{
+#set-dfcy-focus{
     display: inline;
     position: absolute;
     top: -5px;
@@ -169,36 +157,36 @@
     -webkit-transition: left .3s ease-in-out, background-color .3s ease-in-out;
     transition: left .3s ease-in-out, background-color .3s ease-in-out;
 }
-#song-dfcy[dfcy = "ez"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "ez"]>#set-dfcy-focus{
     background-color: #55bb44;
 }
-#song-dfcy[dfcy = "hd"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "hd"]>#set-dfcy-focus{
     background-color: #3173b3;
 }
-#song-dfcy[dfcy = "in"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "in"]>#set-dfcy-focus{
     background-color: #ee2233;
 }
-#song-dfcy[dfcy = "at"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "at"]>#set-dfcy-focus{
     background-color: #3a3637;
 }
-#song-dfcy[dfcy = "ez"]>#song-dfcy-ez{
+#set-dfcy[dfcy = "ez"]>#set-dfcy-ez{
     color: white;
 }
-#song-dfcy[dfcy = "hd"]>#song-dfcy-hd{
+#set-dfcy[dfcy = "hd"]>#set-dfcy-hd{
     color: white;
 }
-#song-dfcy[dfcy = "in"]>#song-dfcy-in{
+#set-dfcy[dfcy = "in"]>#set-dfcy-in{
     color: white;
 }
-#song-dfcy[dfcy = "at"]>#song-dfcy-at{
+#set-dfcy[dfcy = "at"]>#set-dfcy-at{
     color: white;
 }
-#song-dfcy[dfcy = "hd"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "hd"]>#set-dfcy-focus{
     left: calc(50% / 4 + 5px);
 }
-#song-dfcy[dfcy = "in"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "in"]>#set-dfcy-focus{
     left: calc(50% / 2 + 5px);
 }
-#song-dfcy[dfcy = "at"]>#song-dfcy-focus{
+#set-dfcy[dfcy = "at"]>#set-dfcy-focus{
     left: calc(50% / 4 * 3 + 5px);
 }
