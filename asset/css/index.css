@@ -15,6 +15,17 @@ html{
     margin: 0;
     padding: 0;
     outline: none;
+    -webkit-touch-callout:none;  
+    -webkit-user-select:none;  
+    -khtml-user-select:none;  
+    -moz-user-select:none;  
+    -ms-user-select:none;  
+    user-select:none;
+}
+html,body{
+    -moz-user-select : none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 body{
     position: fixed;
@@ -67,6 +78,10 @@ body{
     left: 50%;
     transform: translateX(-50%);
     list-style: none;
+}
+#infoList,#infoList *{
+    z-index: 64;
+    pointer-events: none;
 }
 .infos{
     text-align: center;
