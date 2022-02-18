@@ -79,3 +79,9 @@
 #progressTitle{
     margin-top: 0.25rem;
 }
+#infos{
+    position: absolute;
+    right: 5px;
+    bottom: 2px;
+    opacity: 0.6;
+}

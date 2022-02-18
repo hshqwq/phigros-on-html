@@ -1,58 +1,483 @@
 {
-  "Single": [
+  "chapters": [
     {
-      "name": "test",
-      "id": "song0",
-      "dfcy": {
-        "ez": 2,
-        "hd": 6,
-        "in": 10,
-        "at": "none",
-        "sp": "none"
+      "info": {
+        "name": "Single",
+        "cnName": "单曲 精选集",
+        "description": "",
+        "bgUrl": "asset/img/bg/Single.png",
+        "clear": 0,
+        "FC.": 0,
+        "Phi": 0
       },
-      "mark": 0,
-      "ACC": 0
+      "songs": [
+        {
+          "name": "test",
+          "id": "song0",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "test1",
+          "id": "song1",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        }
+      ]
     },
     {
-      "name": "test1",
-      "id": "song1",
-      "dfcy": {
-        "ez": 4,
-        "hd": 9,
-        "in": 13,
-        "at": "none",
-        "sp": "none"
+      "info": {
+        "name": "Last Chapter",
+        "cnName": "过去的章节",
+        "description": "",
+        "bgUrl": "asset/img/bg/Last%20Chapter.png",
+        "clear": 0,
+        "FC.": 0,
+        "Phi": 0
       },
-      "mark": 0,
-      "ACC": 0
-    }
-  ],
-  "Chapter1": [
-    {
-      "name": "test",
-      "id": "song0",
-      "dfcy": {
-        "ez": 2,
-        "hd": 6,
-        "in": 10,
-        "at": "none",
-        "sp": "none"
-      },
-      "mark": 0,
-      "ACC": 0
+      "songs": [
+        {
+          "name": "Glaciaxion",
+          "id": "cls0",
+          "author": "SunsetRay",
+          "dfcy": {
+            "ez": {
+              "dfcy": 1,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 6,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 12,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "legacy": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "Eradication Catastrophe",
+          "id": "cls1",
+          "author": "Nces",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "Credits",
+          "id": "cls2",
+          "author": "Frums",
+          "dfcy": {
+            "ez": {
+              "dfcy": 4,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 10,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 13,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "Dlyrotz",
+          "id": "cls3",
+          "author": "Likey",
+          "dfcy": {
+            "ez": {
+              "dfcy": 6,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 14,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "Engine x Start!!(melody mix)",
+          "id": "cls4",
+          "author": "CrossingSound",
+          "dfcy": {
+            "ez": {
+              "dfcy": 4,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 10,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 13,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "legacy": {
+              "dfcy": 15,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "光",
+          "id": "cls5",
+          "author": "姜米條",
+          "dfcy": {
+            "ez": {
+              "dfcy": 4,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 8,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 12,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "legacy": {
+              "dfcy": 13,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "Winter↑cube↓",
+          "id": "cls6",
+          "author": "Ctymax feat. NceS",
+          "dfcy": {
+            "ez": {
+              "dfcy": 4,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 8,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 12,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "legacy": {
+              "dfcy": 13,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": "?",
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        }
+      ]
     },
     {
-      "name": "test1",
-      "id": "song1",
-      "dfcy": {
-        "ez": 4,
-        "hd": 9,
-        "in": 13,
-        "at": "none",
-        "sp": "none"
+      "info": {
+        "name": "Chapter4",
+        "cnName": "管道迷宫",
+        "description": "章节4",
+        "bgUrl": "asset/img/bg/Chapter4.png",
+        "clear": 0,
+        "FC.": 0,
+        "Phi": 0
+      }, 
+      "songs": [
+        {
+          "name": "test",
+          "id": "song0",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "test1",
+          "id": "song1",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Chapter5",
+        "cnName": "霓虹灯牌",
+        "description": "章节5",
+        "bgUrl": "asset/img/bg/Chapter5.png",
+        "clear": 0,
+        "FC.": 0,
+        "Phi": 0
       },
-      "mark": 0,
-      "ACC": 0
+      "songs": [
+        {
+          "name": "test",
+          "id": "song0",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        },
+        {
+          "name": "test1",
+          "id": "song1",
+          "author": "",
+          "dfcy": {
+            "ez": {
+              "dfcy": 3,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "hd": {
+              "dfcy": 7,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "in": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "at": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            },
+            "sp": {
+              "dfcy": 11,
+              "FC.": false,
+              "mark": 0,
+              "ACC": 0
+            }
+          }
+        }
+      ]
     }
   ]
 }
