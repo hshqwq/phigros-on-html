@@ -530,6 +530,7 @@ $(() => {
             } else {
                 $('#OFBlurCss').text('');
             }
+            setProgress(9, 13);
             // 加载音频
             loadAudio('asset/audio/bgm/TouchToStart.wav').oncanplaythrough = () => {
             setProgress(10, 13);
