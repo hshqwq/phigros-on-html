@@ -1,6 +1,7 @@
 {
     "pmyc": 0,
     "bottonSize": 100,
+    "OFBlur": true,
     "bgBlur": 15,
     "OFAudio": true,
     "gameAudio": 100,
