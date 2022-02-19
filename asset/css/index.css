@@ -34,9 +34,22 @@ body{
     font-family: Phigros, Phigros cn, Tw Cen MT;
     top: 50vh;
     transform: translateY(-50%);
-    max-height: 80vw;
+    max-height: 85vw;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    font-size: 100%;
+}
+body[landspace="true"]{
+    position: fixed;
+    background-color: black;
+    color: white;
+    font-family: Phigros, Phigros cn, Tw Cen MT;
+    left: 50vw;
+    transform: translate(-50%, -50%) rotate(90deg);
+    max-height: 85vh;
+    width: 100vh;
+    height: 100vw;
     overflow: hidden;
     font-size: 100%;
 }
@@ -121,4 +134,20 @@ body{
 }
 .info-error::before{
     content: "错误: ";
+}
+#landspace {
+    position: fixed;
+    top: 5px;
+    right: -0.5rem;
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem 0.5rem 0.5rem;
+    background-color: black;
+    transform: skew(-15deg);
+    border-left: 3px solid white;
+}
+#landspace::before{
+    content: "手动横屏";
+}
+body[landspace="true"] #landspace::before{
+    content: "回到竖屏"
 }

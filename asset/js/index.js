@@ -583,10 +583,17 @@ $(() => {
         element.oncontextmenu = (e) => {return false;}
     });
     setProgress(0,14)
-    $('#infoList').show();
+    $('#infoList,#landspace').show();
+    $('#landspace').bind('click').click(() => {
+        if ($('body').attr('landspace') == "true") {
+            $('body').attr('landspace', 'false');
+        } else {
+            $('body').attr('landspace', 'true');
+        }
+    });
     changeBg(`img${Math.round(Math.random() * 14)}.webp`);
     $('#start').show().unbind('click').click(() => {
-        $('#start').remove();
+        $('#start,#landspace').remove();
         setTimeout(() => {
             setProgress(1, 14);
             $('#ui,#effects,#title').fadeIn(1000);

@@ -53,14 +53,14 @@
     padding-top: 4rem;
     left: 1.5cm;
     height: calc(100% - 4rem);
-    width: 30vw;
+    width: 30%;
     transform: skew(-15deg);
     background-color: #00000077;
 }
 #songs{
     position: absolute;
     height: 100%;
-    width: 30vw;
+    width: 30%;
     overflow: auto;
     direction: rtl;
 }
@@ -118,8 +118,8 @@
 #song{
     position: absolute;
     top: 55%;
-    right: 15vw;
-    width: 60vw;
+    right: 15%;
+    width: 60%;
     max-width: 25rem;
     height: 65%;
     max-height: 20rem;
