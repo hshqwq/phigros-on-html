@@ -312,14 +312,11 @@ function toChapter(chapter) {
     function changeDfcy(dfcy) {
         if (dfDfcy != dfcy) {
             dfDfcy = dfcy;
-            $('#songs>div').empty();
-            let chapterData = searchDataChapter(chapter);
+            chapterData = searchDataChapter(chapter);
+            $('.song .dfcy').empty();
             for (let i = 0; i < chapterData.songs.length; i++) {
-                if (chapterData.songs[i].dfcy[dfDfcy] === undefined) {
-                    addSong(chapterData.songs[i].name);
-                } else {
-                    addSong(chapterData.songs[i].name, chapterData.songs[i].dfcy[dfDfcy].dfcy);
-                }
+                console.log($('.song').eq(i).children('.song-dfcy'));
+                $('.song').eq(i).children('.dfcy').text(chapterData.songs[i].dfcy[dfDfcy].dfcy);
             }
         }
     }
@@ -330,8 +327,8 @@ function toChapter(chapter) {
     // 添加UI
     $('#ui').append(`<span id="settings" class="button"></span><span id="back" class="button"></span><div id="selects"><div id="songs"><div></div></div></div><div id="song"><img id="song-img"/>
     <div id="song-info">
-    <div id="song-dfcy" dfcy="ez"><span id="song-dfcy-ez">?</span><span id="song-dfcy-hd">?</span><span id="song-dfcy-in">?</span><span id="song-dfcy-at">?</span><div id="song-dfcy-focus"></div>
-    </div>
+    <div id="song-dfcy" dfcy="ez"><span id="song-dfcy-ez">?</span><span id="song-dfcy-hd">?</span><span id="song-dfcy-in">?</span><span id="song-dfcy-at">?</span><div id="song-dfcy-focus"></div></div>
+    <div id="song-mark">0000000</div><div id="song-acc">00.00</div></div>
     </div></div>`);
     // 添加曲目
     let chapterData = searchDataChapter(chapter);
@@ -342,6 +339,7 @@ function toChapter(chapter) {
             addSong(chapterData.songs[i].name, chapterData.songs[i].dfcy[dfDfcy].dfcy);
         }
     }
+    $('.song:first').addClass('focus');
     // 淡入界面
     $('#ui').fadeIn(1000);
     $('#bg').fadeTo(1000, 1, () => {
@@ -440,6 +438,10 @@ function toSettings() {
         <h4 class="set-title">开启特效(对性能要求较高)</h4>
         <input type="checkbox">
     </div>
+    <div id="OFAutoPlay" class="set set-check">
+        <h4 class="set-title">开启AutoPlay</h4>
+        <input type="checkbox">
+    </div>
     <div id="uploadData" class="set set-upload">
     <h4 class="set-title">上传曲目数据</h4>
         <input type="file" accept=".json" alt="浏览器不支持"></input>
@@ -475,8 +477,30 @@ function toSettings() {
     $('.set-check input').each((index, element) => {
         element.checked = settings[element.parentNode.id];
         element.onchange = () => {
-            settings[element.parentNode.id] = element.checked;
-            lS.settings = JSON.stringify(settings);
+            if (element.parentNode.id == 'OFAutoPlay' && element.checked) {
+                var key = prompt(utf8to16(atob('5byA5ZCv5q2k5Yqf6IO96ZyA6KaB5a+G6ZKl')) + '\n' + utf8to16(atob('5a+G6ZKlOg==')));
+                if (key != null && key.length == 15) {
+                    key = btoa(key);
+                    if (key.length == 20) {
+                        key = key.slice(4, 8) + key.slice(16, 20) + key.slice(0, 4) + key.slice(8, 16);
+                        key = key.slice(0, 12) + key.slice(14, 16) + key.slice(12, 14) + key.slice(16, 20);
+                        if (atob(key) === 'IU'+ atob('c2w=') + 'ay' + atob(atob('UXc9PQ==')) + 'anVTtoP') {
+                            settings[element.parentNode.id] = element.checked;
+                            lS.settings = JSON.stringify(settings);
+                        } else {
+                            info(utf8to16(atob('5a+G6ZKl6ZSZ6K+v')), 'error');
+                        }
+                    } else {
+                        info(utf8to16(atob('5a+G6ZKl6ZSZ6K+v')), 'error');
+                    }
+                } else {
+                    info(utf8to16(atob('5a+G6ZKl6ZSZ6K+v')), 'error');
+                }
+            } else {
+                settings[element.parentNode.id] = element.checked;
+                lS.settings = JSON.stringify(settings);
+            }
+            element.checked = settings[element.parentNode.id];
         };
     });
     $('.set-upload input').each((index, element) => {
@@ -497,12 +521,12 @@ function toSettings() {
                     case 'uploadData':
                         lS.data = fileData;
                         data = JSON.parse(lS.data);
-                        info('存储数据已初始化', 'info');
                         break;
                     case 'uploadSettings':
                         lS.settings = fileData;
                         settings = JSON.parse(lS.data);
-                        info('设置数据已初始化', 'info');
+                        settings.OFAutoPlay = false;
+                        lS.settings = JSON.stringify(settings);
                         break;
                 }
                 var reload = confirm('上传的数据需要刷新网页才可以生效\n是否立刻刷新');
@@ -521,10 +545,12 @@ function toSettings() {
                 case 'initData':
                     lS['data'] = `{"chapters":[{"info":{"name":"Single","cnName":"单曲 精选集","description":"","bgUrl":"asset/img/bg/Single.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Last Chapter","cnName":"过去的章节","description":"","bgUrl":"asset/img/bg/Last%20Chapter.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"Glaciaxion","id":"cls0","author":"SunsetRay","dfcy":{"ez":{"dfcy":1,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":6,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"Eradication Catastrophe","id":"cls1","author":"Nces","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"Credits","id":"cls2","author":"Frums","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":10,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":13,"FC.":false,"mark":0,"ACC":0}}},{"name":"Dlyrotz","id":"cls3","author":"Likey","dfcy":{"ez":{"dfcy":6,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":14,"FC.":false,"mark":0,"ACC":0}}},{"name":"Engine x Start!!(melody mix)","id":"cls4","author":"CrossingSound","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":10,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":13,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":15,"FC.":false,"mark":0,"ACC":0}}},{"name":"光","id":"cls5","author":"姜米條","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":8,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":13,"FC.":false,"mark":0,"ACC":0}}},{"name":"Winter↑cube↓","id":"cls6","author":"Ctymax feat. NceS","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":8,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":13,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":"?","FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Chapter4","cnName":"管道迷宫","description":"章节4","bgUrl":"asset/img/bg/Chapter4.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Chapter5","cnName":"霓虹灯牌","description":"章节5","bgUrl":"asset/img/bg/Chapter5.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]}]}`;
                     data = JSON.parse(lS.data);
+                    info('存储数据已初始化', 'info');
                     break;
                 case 'initSettings':
-                    lS['settings'] = `{"pmyc":0,"buttonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true}`;
+                    lS['settings'] = `{"pmyc":0,"buttonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true,"OFAutoPlay":false}`;
                     settings = JSON.parse(lS.data);
+                    info('设置数据已初始化', 'info');
                     break;
             }
             var reload = confirm('上传的数据需要刷新网页才可以生效\n是否立刻刷新');
@@ -582,7 +608,7 @@ $(() => {
     $('*').each((index, element) => {
         element.oncontextmenu = (e) => {return false;}
     });
-    setProgress(0,14)
+    setProgress(0,15)
     $('#infoList,#landspace').show();
     $('#landspace').bind('click').click(() => {
         if ($('body').attr('landspace') == "true") {
@@ -607,19 +633,19 @@ $(() => {
             if (window.opera) {
                 ua = 'opera';
                 info('当前浏览器可能无法正常显示界面', 'warning');
-                setProgress(3, 14);
+                setProgress(3, 15);
             } else if (ua.includes('Firefox')) {
                 ua = 'firefox';
                 info('当前浏览器可能无法正常显示界面', 'warning');
-                setProgress(4, 14);
+                setProgress(4, 15);
             } else if (ua.includes('Chrome')) {
                 ua = 'chrome';
                 info('正常情况下当前浏览器可以完美适配游戏界面', 'good');
-                setProgress(5, 14);
+                setProgress(5, 15);
             } else {
                 ua = 'unknow';
                 info('当前浏览器可能无法正常显示界面', 'warning');
-                setProgress(6, 14);
+                setProgress(6, 15);
             }
             setProgress(7, 14)
             //检查已存储数据
@@ -632,20 +658,20 @@ $(() => {
                     info('存储数据已初始化', 'info');
                 };
                 if (lS['settings'] === undefined) { //如果没存储过设置则初始化存储设置
-                    lS['settings'] = `{"pmyc":0,"bottonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true}`;
+                    lS['settings'] = `{"pmyc":0,"buttonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true,"OFAutoPlay":false}`;
                     info('设置数据已初始化', 'info');
                 };
                 if (lS['version'] === undefined || lS['version'] < DATAVERSION) {
                     lS['version'] = DATAVERSION;
                     lS['data'] = `{"chapters":[{"info":{"name":"Single","cnName":"单曲 精选集","description":"","bgUrl":"asset/img/bg/Single.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Last Chapter","cnName":"过去的章节","description":"","bgUrl":"asset/img/bg/Last%20Chapter.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"Glaciaxion","id":"cls0","author":"SunsetRay","dfcy":{"ez":{"dfcy":1,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":6,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"Eradication Catastrophe","id":"cls1","author":"Nces","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"Credits","id":"cls2","author":"Frums","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":10,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":13,"FC.":false,"mark":0,"ACC":0}}},{"name":"Dlyrotz","id":"cls3","author":"Likey","dfcy":{"ez":{"dfcy":6,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":14,"FC.":false,"mark":0,"ACC":0}}},{"name":"Engine x Start!!(melody mix)","id":"cls4","author":"CrossingSound","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":10,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":13,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":15,"FC.":false,"mark":0,"ACC":0}}},{"name":"光","id":"cls5","author":"姜米條","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":8,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":13,"FC.":false,"mark":0,"ACC":0}}},{"name":"Winter↑cube↓","id":"cls6","author":"Ctymax feat. NceS","dfcy":{"ez":{"dfcy":4,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":8,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":12,"FC.":false,"mark":0,"ACC":0},"legacy":{"dfcy":13,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":"?","FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Chapter4","cnName":"管道迷宫","description":"章节4","bgUrl":"asset/img/bg/Chapter4.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]},{"info":{"name":"Chapter5","cnName":"霓虹灯牌","description":"章节5","bgUrl":"asset/img/bg/Chapter5.png","clear":0,"FC.":0,"Phi":0},"songs":[{"name":"test","id":"song0","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}},{"name":"test1","id":"song1","author":"","dfcy":{"ez":{"dfcy":3,"FC.":false,"mark":0,"ACC":0},"hd":{"dfcy":7,"FC.":false,"mark":0,"ACC":0},"in":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"at":{"dfcy":11,"FC.":false,"mark":0,"ACC":0},"sp":{"dfcy":11,"FC.":false,"mark":0,"ACC":0}}}]}]}`;
-                    lS['settings'] = `{"pmyc":0,"bottonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true}`;
+                    lS['settings'] = `{"pmyc":0,"buttonSize":100,"OFBlur": true,"bgBlur":100,"OFAudio":true,"gameAudio":100,"uiAudio":100,"touchAudio":100,"OFDyfz":true,"OFFcApzsq":true,"OFEffect":true,"OFAutoPlay":false}`;
                     info('存储与设置数据结构已更新', 'info');
                 }
                 // 将数据由json格式转为变量
                 settings = JSON.parse(lS['settings']);
                 data = JSON.parse(lS['data']);
             }
-            setProgress(8, 14);
+            setProgress(8, 15);
             // rBmT特效定时器
             if (settings.OFEffect) {
                 efRBmT = setInterval(() => {
@@ -659,16 +685,19 @@ $(() => {
             } else {
                 $('#OFBlurCss').text('');
             }
-            setProgress(10, 14);
+            setProgress(10, 15);
             // 加载音频
             loadAudio('asset/audio/bgm/TouchToStart.wav').oncanplaythrough = () => {
-            setProgress(11, 14);
+            setProgress(11, 15);
             loadAudio('asset/audio/bgm/ChapterSelect.wav').oncanplaythrough = () => {
-            setProgress(12, 14);
+            setProgress(12, 15);
             loadAudio('asset/audio/ui/Tap3.wav').oncanplaythrough = () => {
-            setProgress(13, 14);
+            setProgress(13, 15);
             loadAudio('asset/audio/ui/Tap1.wav').oncanplaythrough = () => {
-                setProgress(14, 14);
+                setProgress(14, 15);
+                settings.OFAutoPlay = false;
+                lS.settings = JSON.stringify(settings);
+                setProgress(15, 15);
                 setAudio(3, 'TouchToStart.wav');
                 setAudio(1, 'TouchToStart.wav');
                 // 显示背景

@@ -39,20 +39,19 @@
 }
 #selects{
     position: absolute;
-    padding-top: 2rem;
     left: -0.5rem;
-    height: calc(100% - 2rem);
+    height: 100%;
     width: 50%;
     transform: skew(-15deg);
     background-color: #00000077;
 }
 #sets{
     position: absolute;
-    height: 100%;
-    width: 30%;
+    width: 100%;
     overflow: auto;
     direction: ltr;
-    width: 100%;
+    height: calc(100% - 2rem);
+    padding-top: 2rem;
 }
 #sets>div{
     display: flex;
@@ -154,6 +153,7 @@ input[type="checkbox"]:checked::after {
 input[type="file"] {
     width: 5rem;
     height: 0;
+    border-top: 2px solid white;
 }
 input[type="file"]::before {
     content: "上传文件";
